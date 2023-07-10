@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import LogIn from "./components/auth/LogIn";
+import ProtectedRout from "./components/routes/ProtectedRout";
+import { applyMiddleware, createStore } from "redux";
+import { reducer } from "./redux/reducer";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { createLogger } from "redux-logger";
+import AdminPanel from "./components/admin/AdminPanel";
+const logger = createLogger();
+const store = createStore(reducer, applyMiddleware(thunk, logger));
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/login" element={<LogIn />} />
+
+      <Route path="/" element={<ProtectedRout />}>
+        <Route index element={<AdminPanel />} />
+      </Route>
+    </>
+  )
+);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </>
   );
 }
 
