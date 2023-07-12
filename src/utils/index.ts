@@ -1,1 +1,1 @@
-export const BASE_URL = "https://precious-tweed-jacket-fox.cyclic.app/";
+export const BASE_URL = "https://media-server-vpt1.onrender.com/";
