@@ -1,4 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../../utils";
@@ -11,6 +17,7 @@ const LogIn = () => {
     email: "",
     password: "",
   });
+  const max512px = useMediaQuery("(max-width:512px)");
 
   interface StateType {
     admin: {
@@ -73,7 +80,7 @@ const LogIn = () => {
 
       <form
         style={{
-          width: "500px",
+          width: max512px ? "100%" : "500px",
           height: "300px",
           display: "flex",
           alignItems: "center",
