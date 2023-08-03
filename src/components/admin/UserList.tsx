@@ -4,33 +4,34 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils";
 import { UserType } from "../../types/type";
-const columns: GridColDef[] = useMemo(
-  () => [
-    { field: "id", headerName: "ID", width: 250 },
-    { field: "firstName", headerName: "First name", width: 200 },
-    { field: "lastName", headerName: "Last name", width: 200 },
-    { field: "email", headerName: "Email", width: 250 },
-    { field: "payment", headerName: "Payment", width: 200 },
-    { field: "isActivated", headerName: "User Activated", width: 200 },
-
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ],
-  []
-);
 
 export default function UserList() {
   const [users, setUsers] = useState<Array<UserType>>([]);
   const addNewId = users?.map((item) => ({ ...item, id: item._id }));
   const max600px = useMediaQuery("(max-width:600px)");
   const max1000px = useMediaQuery("(max-width:1000px)");
+
+  const columns: GridColDef[] = useMemo(
+    () => [
+      { field: "id", headerName: "ID", width: 250 },
+      { field: "firstName", headerName: "First name", width: 200 },
+      { field: "lastName", headerName: "Last name", width: 200 },
+      { field: "email", headerName: "Email", width: 250 },
+      { field: "payment", headerName: "Payment", width: 200 },
+      { field: "isActivated", headerName: "User Activated", width: 200 },
+
+      {
+        field: "fullName",
+        headerName: "Full name",
+        description: "This column has a value getter and is not sortable.",
+        sortable: false,
+        width: 160,
+        valueGetter: (params: GridValueGetterParams) =>
+          `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
     async function getUsers() {
