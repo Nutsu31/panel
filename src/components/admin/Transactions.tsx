@@ -24,16 +24,14 @@ const Transactions = () => {
       isMounted = false;
     }
     getPayouts();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(payouts);
 
   const handleFilterCompleted = () => {
     const completed = [...payouts].filter(
       (payout: Payouts) => payout.status === "completed"
     );
-    return dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: completed });
+    dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: completed });
   };
 
   const handleFilterActive = () => {
@@ -47,7 +45,7 @@ const Transactions = () => {
     const failed = [...payouts].filter(
       (payout: Payouts) => payout.status === "failed"
     );
-    return dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: failed });
+    dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: failed });
   };
   return (
     <Box sx={{ width: "100%", padding: 3, height: "100vh", overflow: "auto" }}>

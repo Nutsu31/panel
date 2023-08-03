@@ -24,12 +24,15 @@ const UploadFile = () => {
   };
 
   useEffect(() => {
-    const alertTimeOut: any = setTimeout(() => setAlert({}), 3000);
+    let alertTimeOut: any;
+    if (alert.message && alert.result) {
+      alertTimeOut = setTimeout(() => setAlert({}), 3000);
+    }
+
     return () => {
-      if (alert.result) {
-        setLoading(false);
+      if (alertTimeOut) {
+        clearTimeout(alertTimeOut);
       }
-      clearTimeout(alertTimeOut);
     };
   }, [alert.message, alert.result]);
 
