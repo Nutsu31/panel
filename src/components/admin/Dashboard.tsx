@@ -18,15 +18,7 @@ const Dashboard = ({
   const dispatch = useDispatch();
   const handleLogOut = useCallback(() => {
     dispatch({ type: ACTIONS.LOG_OUT });
-  }, []);
-
-  const handleButtonClick = useCallback(
-    (btnNumber: number) => () => {
-      setActiveBtn(btnNumber);
-    },
-
-    [setActiveBtn]
-  );
+  }, [dispatch]);
 
   useEffect(() => {
     setShowMenu(false);
@@ -88,7 +80,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => handleButtonClick(1)}
+            onClick={() => setActiveBtn(1)}
             sx={{
               background: activeBtn === 1 ? "white" : "#193755",
               color: activeBtn === 1 ? "black" : "white",
@@ -109,7 +101,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => handleButtonClick(2)}
+            onClick={() => setActiveBtn(2)}
             sx={{
               background: activeBtn === 2 ? "white" : "#193755",
               color: activeBtn === 2 ? "black" : "white",
@@ -129,7 +121,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => handleButtonClick(3)}
+            onClick={() => setActiveBtn(3)}
             sx={{
               background: activeBtn === 3 ? "white" : "#193755",
               color: activeBtn === 3 ? "black" : "white",

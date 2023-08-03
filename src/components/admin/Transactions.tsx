@@ -36,21 +36,22 @@ const Transactions = () => {
       (payout: Payouts) => payout.status === "completed"
     );
     dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: completed });
-  }, []);
+  }, [dispatch, payouts]);
 
   const handleFilterActive = useCallback(() => {
     return dispatch({
       type: ACTIONS.FILTER_TRANSACTIONS,
       payload: payOuts,
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, payouts]);
 
   const handleFilterFailed = useCallback(() => {
     const failed = [...payouts].filter(
       (payout: Payouts) => payout.status === "failed"
     );
     dispatch({ type: ACTIONS.FILTER_TRANSACTIONS, payload: failed });
-  }, []);
+  }, [dispatch, payouts]);
   return (
     <Box sx={{ width: "100%", padding: 3, height: "100vh", overflow: "auto" }}>
       <Box sx={{ width: "100%", height: 70 }}>
