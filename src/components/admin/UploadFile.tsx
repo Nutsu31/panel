@@ -31,7 +31,7 @@ const UploadFile = () => {
       }
       clearTimeout(alertTimeOut);
     };
-  }, [alert]);
+  }, [alert.message, alert.result]);
 
   const max600px = useMediaQuery("(max-width:600px)");
 
