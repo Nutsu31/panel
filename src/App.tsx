@@ -10,10 +10,8 @@ import { applyMiddleware, createStore } from "redux";
 import { reducer } from "./redux/reducer";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { createLogger } from "redux-logger";
 import AdminPanel from "./components/admin/AdminPanel";
-const logger = createLogger();
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 const router = createBrowserRouter(
   createRoutesFromElements(

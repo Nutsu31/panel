@@ -4,6 +4,7 @@ import { ACTIONS } from "./actions";
 const initialState = {
   users: [],
   admin: {},
+  transactions: [],
 };
 
 interface StateType {
@@ -25,6 +26,16 @@ export const reducer = (
       return {
         ...state,
         admin: action.payload,
+      };
+    case ACTIONS.FETCH_TRANSACTIONS:
+      return {
+        ...state,
+        transactions: [...action.payload],
+      };
+    case ACTIONS.FILTER_TRANSACTIONS:
+      return {
+        ...state,
+        transactions: action.payload,
       };
     case ACTIONS.LOG_OUT:
       return {

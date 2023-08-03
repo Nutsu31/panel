@@ -118,6 +118,26 @@ const Dashboard = ({
           >
             Users
           </Button>
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={() => setActiveBtn(3)}
+            sx={{
+              background: activeBtn === 3 ? "white" : "#193755",
+              color: activeBtn === 3 ? "black" : "white",
+              boxShadow: "none",
+              borderTopLeftRadius: activeBtn === 3 ? 40 : 0,
+              borderBottomLeftRadius: activeBtn === 3 ? 40 : 0,
+              height: 50,
+
+              "&:hover": {
+                backgroundColor: "white",
+                color: "black",
+              },
+            }}
+          >
+            Transactions
+          </Button>
         </Box>
         <HandleSign />
         <Box sx={{ width: "100%" }}>

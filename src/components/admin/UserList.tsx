@@ -3,15 +3,14 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils";
-import { v4 as uuid } from "uuid";
 import { UserType } from "../../types/type";
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  { field: "email", headerName: "Email", width: 240 },
-  { field: "payment", headerName: "Payment", width: 130 },
-  { field: "isActivated", headerName: "User Activated", width: 130 },
+  { field: "id", headerName: "ID", width: 250 },
+  { field: "firstName", headerName: "First name", width: 200 },
+  { field: "lastName", headerName: "Last name", width: 200 },
+  { field: "email", headerName: "Email", width: 250 },
+  { field: "payment", headerName: "Payment", width: 200 },
+  { field: "isActivated", headerName: "User Activated", width: 200 },
 
   {
     field: "fullName",
@@ -26,7 +25,7 @@ const columns: GridColDef[] = [
 
 export default function UserList() {
   const [users, setUsers] = useState<Array<UserType>>([]);
-  const addNewId = users?.map((item) => ({ ...item, id: uuid() }));
+  const addNewId = users?.map((item) => ({ ...item, id: item._id }));
   const max600px = useMediaQuery("(max-width:600px)");
   const max1000px = useMediaQuery("(max-width:1000px)");
 
@@ -34,7 +33,6 @@ export default function UserList() {
     async function getUsers() {
       const res = await axios.get(`${BASE_URL}users`);
       const data = res.data;
-      console.log(data);
       if (data.status === "ok") return setUsers(data.getAllUsers);
       return;
     }

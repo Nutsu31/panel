@@ -33,4 +33,15 @@ export interface StateType {
     message: string;
   };
   users: [];
+  transactions: [];
+}
+
+export interface Payouts {
+  id: string;
+  createdAt: number;
+  amount: number;
+  currency: string;
+  status: string;
+  _id: string;
+  destination: string;
 }

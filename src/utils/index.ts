@@ -1,2 +1,2 @@
-export const BASE_URL =
-  "https://b3df-2a0b-6204-31eb-cb00-c4be-47ce-b5b6-a0de.ngrok-free.app/";
+export const BASE_URL = "https://serpsupport-d0fb33a56e3d.herokuapp.com/";
+// export const BASE_URL = "http://localhost:4000/";
