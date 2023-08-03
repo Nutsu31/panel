@@ -1,27 +1,30 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { Box, Typography, useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils";
 import { UserType } from "../../types/type";
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 250 },
-  { field: "firstName", headerName: "First name", width: 200 },
-  { field: "lastName", headerName: "Last name", width: 200 },
-  { field: "email", headerName: "Email", width: 250 },
-  { field: "payment", headerName: "Payment", width: 200 },
-  { field: "isActivated", headerName: "User Activated", width: 200 },
+const columns: GridColDef[] = useMemo(
+  () => [
+    { field: "id", headerName: "ID", width: 250 },
+    { field: "firstName", headerName: "First name", width: 200 },
+    { field: "lastName", headerName: "Last name", width: 200 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "payment", headerName: "Payment", width: 200 },
+    { field: "isActivated", headerName: "User Activated", width: 200 },
 
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
+    {
+      field: "fullName",
+      headerName: "Full name",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      valueGetter: (params: GridValueGetterParams) =>
+        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
+  ],
+  []
+);
 
 export default function UserList() {
   const [users, setUsers] = useState<Array<UserType>>([]);
@@ -31,10 +34,19 @@ export default function UserList() {
 
   useEffect(() => {
     async function getUsers() {
-      const res = await axios.get(`${BASE_URL}users`);
-      const data = res.data;
-      if (data.status === "ok") return setUsers(data.getAllUsers);
-      return;
+      try {
+        const res = await axios.get(`${BASE_URL}users`);
+        const data = res.data;
+        if (data.status === "ok") {
+          const updatedUsers = data.getAllUsers.map((user: UserType) => ({
+            ...user,
+            id: user._id,
+          }));
+          setUsers(updatedUsers);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
     getUsers();
   }, []);

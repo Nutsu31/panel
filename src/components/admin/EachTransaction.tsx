@@ -1,7 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import React, { memo } from "react";
 import { Payouts } from "../../types/type";
-
 const EachTransaction = ({ payouts }: { payouts: Payouts }) => {
   return (
     <Box
@@ -81,4 +80,4 @@ const EachTransaction = ({ payouts }: { payouts: Payouts }) => {
   );
 };
 
-export default EachTransaction;
+export default memo(EachTransaction);

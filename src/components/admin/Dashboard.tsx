@@ -1,5 +1,5 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HandleSign from "./HandleSign";
 import { Close, Menu } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
@@ -16,9 +16,17 @@ const Dashboard = ({
   const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const handleLogOut = () => {
+  const handleLogOut = useCallback(() => {
     dispatch({ type: ACTIONS.LOG_OUT });
-  };
+  }, []);
+
+  const handleButtonClick = useCallback(
+    (btnNumber: number) => () => {
+      setActiveBtn(btnNumber);
+    },
+
+    [setActiveBtn]
+  );
 
   useEffect(() => {
     setShowMenu(false);
@@ -80,7 +88,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => setActiveBtn(1)}
+            onClick={() => handleButtonClick(1)}
             sx={{
               background: activeBtn === 1 ? "white" : "#193755",
               color: activeBtn === 1 ? "black" : "white",
@@ -101,7 +109,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => setActiveBtn(2)}
+            onClick={() => handleButtonClick(2)}
             sx={{
               background: activeBtn === 2 ? "white" : "#193755",
               color: activeBtn === 2 ? "black" : "white",
@@ -121,7 +129,7 @@ const Dashboard = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={() => setActiveBtn(3)}
+            onClick={() => handleButtonClick(3)}
             sx={{
               background: activeBtn === 3 ? "white" : "#193755",
               color: activeBtn === 3 ? "black" : "white",
